@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{url}}</h2>
+    <h2>{{message}}</h2>
+    <h2 v-html="url"></h2>
+    <!-- 
+      若要正常显示html元素，则使用v-html属性，
+      设置v-html属性，属性值为带标签的字符串
+     -->
+  </div>
+</body>
+<script src='../../VueJS/vue.js'></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好',
+      url: '<a href="http://www.baidu.com">百度一下</a>',
+    }
+  })
+</script>
+
+</html>
