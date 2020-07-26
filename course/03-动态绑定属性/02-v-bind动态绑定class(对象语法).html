@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      color: red;
+    }
+
+    .line {
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <h2 class="active">{{message}}</h2>
+    <h2 :class="hStyle">{{message}}</h2> -->
+
+    <h2 :class="getClasses()">{{message}}</h2>
+    <!-- 
+      * 除了v-on属性以外的属性，调用方法时，都需要加圆括号()
+     -->
+
+    <!-- 
+        使用这种方法可以通过app.isActive = Boolean 选择样式
+       -->
+    <button @click="cc">改变颜色</button>
+  </div>
+</body>
+<script src='../../VueJS/vue.js'></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      // active: 'active',
+      isLine: true,
+      isActive: true,
+    },
+    methods: {
+      cc() {
+        this.isLine = !this.isLine
+      },
+      getClasses() {
+        return { active: this.isActive, line: this.isLine }
+      }
+    },
+  })
+</script>
+
+</html>
