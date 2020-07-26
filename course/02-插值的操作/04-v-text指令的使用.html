@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{message}},Welcome</h2>
+    <h2 v-text="message">,Welcome</h2>
+  </div>
+  <!-- 
+    使用v-text属性可以解析内容，
+    但会覆盖当前标签内的所有内容，
+    不建议使用
+   -->
+</body>
+<script src='../../VueJS/vue.js'></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+    }
+  })
+</script>
+
+</html>

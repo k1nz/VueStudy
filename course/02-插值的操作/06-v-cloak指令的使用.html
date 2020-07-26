@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <h2>{{message}}</h2>
+    <h2>{{message}}</h2>
+  </div>
+  <!-- 
+    v-cloak
+      该属性可以设置vue解析之前的样式，
+      vue解析后自动删除app中的v-clock属性
+   -->
+</body>
+<script src='../../VueJS/vue.js'></script>
+<script>
+  setTimeout(() => {
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello',
+      }
+    })
+  }, 1000);
+
+  // 延迟解析app
+
+</script>
+
+</html>
