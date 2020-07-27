@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{lastName + ' ' + firstName}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{fullName}}</h2>
+    <!-- * 使用计算属性时不需要加小括号 -->
+  </div>
+
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        firstName: 'zirong',
+        lastName: 'qiu',
+      },
+      computed: {
+        fullName: function () {
+          return this.lastName + ' ' + this.firstName
+        }
+      },
+      //* 计算属性
+      //* 命名最好为变量形式
+
+      methods: {
+        getFullName() {
+          return this.lastName + ' ' + this.firstName
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
