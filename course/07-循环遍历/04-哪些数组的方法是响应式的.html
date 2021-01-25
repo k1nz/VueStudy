@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .btn {
+      position: fixed;
+      top: 0;
+      left: 50%;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="item in letters" :key="item.id">{{item}}</li>
+    </ul>
+    <div class="btn">
+      <Button @click="c1">push()</Button>
+
+      <!-- 只有c2不是响应式的 -->
+      <!-- 可以使用splice代替 -->
+      <button @click="c2">修改索引对应的元素</button>
+
+      <!-- 亦可使用Vue.set() -->
+      <button @click="clickSet">set()方法代替通过索引修改元素</button>
+
+
+      <button @click="c3">pop()</button>
+      <button @click="c4">shift()</button>
+      <button @click="c5">unshift()</button>
+      <button @click="c6">splice()</button>
+      <button @click="c7">sort()</button>
+      <button @click="c8">reverse()</button>
+
+    </div>
+
+  </div>
+
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello',
+        letters: ['A', 'B', 'C', 'D', 'E'],
+      },
+      methods: {
+        // 1.push()
+        c1() {
+          this.letters.push("test")
+        },
+        // 修改索引对应元素
+        c2() {
+          this.letters[3] = 'TEST'
+        },
+        // pop()
+        c3() {
+          this.letters.pop()
+        },
+        // shift()
+        c4() {
+          this.letters.shift()
+        },
+        // unshift()
+        c5() {
+          this.letters.unshift("F")
+        },
+        // splice 插入
+        c6() {
+          this.letters.splice(2, 0, 'F')
+        },
+        // sort
+        c7() {
+          this.letters.sort()
+        },
+        // reverse
+        c8() {
+          this.letters.reverse()
+        },
+        // set
+        clickSet() {
+          Vue.set(this.letters, 3, 'TEST')
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

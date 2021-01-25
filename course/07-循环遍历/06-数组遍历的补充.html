@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1. filter (过滤)
+    // 筛选nums中小于100的数，并返回新数组
+    const nums = [10, 20, 111, 40, 333, 4444, 80]
+    let filterNums = nums.filter(n => {
+      return n < 100
+    })
+
+    // 2. map (操作)
+    // 将filterNums的值全部*2，并返回新的数组
+    let mapNums = filterNums.map(n => {
+      return n * 2
+    })
+
+    // 3.reduce (操作)
+    // 将mapNums进行相加，返回最终结果
+    // map = [20, 40, 80, 160]
+    let finalNum = mapNums.reduce((preValue, n) => {
+      return preValue + n
+    }, 0)
+    // 0 为preValue
+    // 遍历:
+    // 1  preValue = 0, n = 20
+    // 2  preValue = 20, n = 40
+    // 3  preValue = 60, n = 80
+    // 4  preValue = 140, n = 160
+    // 5  return 140+160
+
+    // 综合操作，将nums的每一个小于100的数据*2 再相加
+    let total = nums.filter(n => {
+      return n < 100
+    }).map(n => {
+      return n * 2
+    }).reduce((preValue, n) => {
+      return preValue + n
+    }, 0)
+
+    // 简写
+    let total = nums.filter(n => n < 100).map(n => n * 2).reduce((prev, n) => prev + n)
+
+
+  </script>
+</body>
+
+</html>

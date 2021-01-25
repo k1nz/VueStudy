@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+
+    <label for="inputArea">{{getType}}
+      <input type="text" id="inputArea" v-bind:placeholder="getType">
+      <input type="button" value="切换类型" @click='reverse'>
+    </label>
+
+
+
+
+
+    <!-- 下面这种方法中，input输入框在切换的时候不会清空
+        而是继承上次输入的内容，原因是在vue底层中对dom操作时会在
+        虚拟dom中对类似的元素进行复用，提高效率
+
+        若不需要使用这种复用的时候可以对元素增加 key属性
+        key: 
+            当key值相同时，可以对元素进行复用
+    -->
+    <label for="a1" v-if="show">
+      用户账号：
+      <input type="text" id="a1" placeholder="用户账号">
+    </label>
+    <label for="a2" v-else="show">
+      用户邮箱：
+      <input type="text" id="a2" placeholder="用户邮箱">
+    </label>
+    <input type="button" value="切换类型" @click='changeType'>
+
+
+    <!-- 使用key元素 -->
+    <label for="a1" v-if="show">
+      用户账号：
+      <input type="text" id="a1" placeholder="用户账号" key="username">
+    </label>
+    <label for="a2" v-else="show">
+      用户邮箱：
+      <input type="text" id="a2" placeholder="用户邮箱" key="email">
+    </label>
+    <input type="button" value="切换类型" @click='changeType'>
+
+  </div>
+
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello',
+        type: 0,
+        show: 0,
+      },
+      computed: {
+        getType() {
+          let typeText = ''
+          if (!this.type) typeText = '用户账号'
+          else typeText = '用户邮箱'
+          return typeText
+        }
+      },
+      methods: {
+        reverse() {
+          this.type = !this.type
+        },
+        changeType() {
+          this.show = !this.show
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

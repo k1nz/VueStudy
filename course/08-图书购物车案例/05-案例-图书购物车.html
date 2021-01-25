@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    [v-clock] {
+      display: none;
+    }
+
+    #app {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #eee;
+      padding: 5px 10px;
+    }
+
+    thead tr {
+      background-color: rgb(189, 189, 189);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <p v-if="empty">购物车为空</p>
+
+
+    <div v-else="empty">
+      <table>
+        <thead>
+          <tr>
+            <td></td>
+            <td>书籍名称</td>
+            <td>出版日期</td>
+            <td>单价</td>
+            <td>购买数量</td>
+            <td>操作</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(items,index) in books" :key="items.id">
+            <td>{{items.id}} </td>
+            <td>{{items.BName}}</td>
+            <td>{{items.BDate}}</td>
+            <td>{{items.BPrice | showPrice}}</td>
+            <td>
+              <button @click="decrease(index)">-</button>
+              {{items.quantity}}
+              <button @click="increase(index)">+</button>
+            </td>
+            <td><button @click="remove(index)">移除</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>总价:{{totalPrice | showPrice}}</p>
+    </div>
+
+  </div>
+
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello',
+        books: [
+          { id: 1, BName: '算法导论', BDate: '2006-9', BPrice: 85.50, quantity: 1 },
+          { id: 2, BName: 'Unix编程艺术', BDate: '2010-9', BPrice: 125.00, quantity: 1 },
+          { id: 3, BName: '代码大全', BDate: '2009-5', BPrice: 52.00, quantity: 1 },
+          { id: 4, BName: '数据结构', BDate: '2008-2', BPrice: 39.00, quantity: 1 },
+        ],
+        currId: 0,
+        empty: false,
+      },
+      computed: {
+        totalPrice() {
+          // let tempTotal = 0
+          // // for (let i in this.books) {
+          // //   let items = this.books[i]
+          // //   tempTotal += items.quantity * items.BPrice
+          // //   console.log(tempTotal);
+          // // }
+          // for (let i = 0; i < this.books.length; i++) {
+          //   const e = this.books[i];
+          //   tempTotal += e.quantity * e.BPrice
+          // }
+          // return tempTotal
+
+          return this.books.reduce((prev, n) => prev + n.BPrice * n.quantity, 0)
+        }
+      },
+      methods: {
+        // todo:
+        remove(index) {
+          this.books.splice(index, 1)
+          this.empty = !this.books.length
+        },
+        increase(index) {
+          this.books[index].quantity++
+        },
+        decrease(index) {
+          if (this.books[index].quantity > 0)
+            this.books[index].quantity--
+        },
+      },
+      filters: {
+        showPrice(price) {
+          return '￥' + price.toFixed(2)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
