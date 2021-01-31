@@ -10,11 +10,43 @@
 <body>
   <div id="app">
     <!-- 事件调用的方法没有参数 -->
-    <button>按钮1</button>
-    <button>按钮2</button>
-    <button>按钮3</button>
-    <button>按钮4</button>
+    <button @click="btn1Click">btn1Click</button>
+    <button @click="btn1Click()">btn1Click()</button>
+
+    <!-- 调用带参数，方法中接受参数 -->
+    <button @click="btn2Click(123)">btn2Click(123)</button>
+    <!-- 方法带参数，调用时带括号，返回undefined -->
+    <button @click="btn2Click()">btn2Click()</button>
+    <!-- 方法带参数，调用时不带括号：返回默认事件(这里为点击事件) -->
+    <button @click="btn2Click">btn2Click</button>
+
+    <!-- 方法定义时，需要event对象，同时需要其他参数 -->
+    <button @click="btn3Click">btn3Click</button>
+    <!-- 在多参数方法中，若调用时不带小括号，则第一个参数默认为event事件，第二个参数为undefined -->
+    <!-- 调用时，传入多参数，需要获取event事件时，需要使用$event传递默认事件实参 -->
+    <button @click="btn3Click('abc',$event)">btn3Click</button>
   </div>
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello',
+
+      },
+      methods: {
+        btn1Click() {
+          console.log("btnClick1");
+        },
+        btn2Click(event) {
+          console.log("btnClick2", event);
+        },
+        btn3Click(p, event) {
+          console.log("btnClick3", p, event);
+        },
+      },
+    })
+  </script>
 </body>
 
 </html>

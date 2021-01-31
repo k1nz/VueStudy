@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <counter-cpn></counter-cpn>
+    <counter-cpn></counter-cpn>
+    <counter-cpn></counter-cpn>
+  </div>
+
+  <template id="counter-cpn">
+    <div>
+      <h2>当前计数: {{counter}}</h2>
+      <button @click="increment">+</button>
+      <button @click="decrement">-</button>
+    </div>
+  </template>
+
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+    // const obj = {
+    //   counter: 0,
+    // }
+
+    Vue.component('counter-cpn', {
+      template: '#counter-cpn',
+      // 注意：这里的data是一个函数，返回一个data对象，这样做可以
+      //     使每一个模板生成的组件拥有独立的变量（状态）
+      data() {
+        return {
+          counter: 0,
+        }
+      },
+      // 错误示范：使用同一个变量
+      // data() {
+      //   return obj
+      // },
+      methods: {
+        increment() {
+          this.counter++
+        },
+        decrement() {
+          this.counter--
+        }
+      },
+    })
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello',
+      }
+    })
+  </script>
+</body>
+
+</html>

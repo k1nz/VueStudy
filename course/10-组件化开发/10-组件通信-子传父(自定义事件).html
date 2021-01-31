@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!-- 1.父组件模板 -->
+  <div id="app">
+    <!-- v-on:监听item-click自定义事件至父组件中的cpnClick方法中 -->
+    <!-- item-click需要使用横杠分隔 -->
+    <!-- cpnClick不带参数会默认传递子组件发射时带的第二个参数(item) -->
+    <v-cpn @item-click="cpnClick"></v-cpn>
+  </div>
+
+  <!-- 2.子组件模板 -->
+  <template id="category">
+    <div>
+      <button v-for="item in categories" @click="btnClick(item)">{{item.name}}</button>
+    </div>
+  </template>
+
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+    // 1.子组件
+    const VCpn = {
+      template: "#category",
+      data() {
+        return {
+          categories: [
+            { id: 1, name: "热销推荐" },
+            { id: 2, name: "手机数码" },
+            { id: 3, name: "热门书籍" },
+            { id: 4, name: "家用电器" },
+          ]
+        }
+      },
+      methods: {
+        btnClick(item) {
+          // 发射事件：自定义事件
+          this.$emit('item-click', item)
+        }
+      },
+    }
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello',
+
+
+      },
+      components: {
+        "v-cpn": VCpn
+      },
+      methods: {
+        cpnClick(item) {
+          console.log(item);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

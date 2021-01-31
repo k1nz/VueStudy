@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 1.CheckBox单选框 -->
+    <label for="protocol">
+      <input type="checkbox" id="protocol" v-model="agreement">同意协议
+    </label>
+    是否同意：{{agreement}}
+    <button v-if="agreement">下一步</button>
+    <button :disabled="!agreement">下一步</button>
+
+    <br />
+
+    <!-- 2.CheckBox多选框 -->
+    <label for="b1">
+      <input type="checkbox" name="" v-model="hobbies" id="b1" value="篮球">篮球
+    </label>
+    <label for="b2">
+      <input type="checkbox" name="" v-model="hobbies" id="b2" value="足球">足球
+    </label>
+    <label for="b3">
+      <input type="checkbox" name="" v-model="hobbies" id="b3" value="乒乓球">乒乓球
+    </label>
+    <label for="b4">
+      <input type="checkbox" name="" v-model="hobbies" id="b4" value="羽毛球">羽毛球
+    </label>
+    <h2>您选择的爱好是{{hobbies}}</h2>
+
+
+    <!-- 使用值绑定:value来简化上面的操作 -->
+    <label v-for="item in allHobbies" :for="item">
+      <input type="checkbox" :value="item" :id="item" v-model="hobbies">{{item}}
+    </label>
+
+
+  </div>
+
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello',
+        agreement: false,  // 单选框
+        hobbies: [],  // 多选框
+        allHobbies: ['篮球', '足球', '羽毛球', '乒乓球', '高尔夫球', '网球']
+      }
+    })
+  </script>
+</body>
+
+</html>

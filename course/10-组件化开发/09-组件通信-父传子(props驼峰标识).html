@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- html中使用横杠代替驼峰标识 -->
+    <v-info :c-info="info.a"></v-info>
+    <v-info :c-info="info.b"></v-info>
+  </div>
+
+  <template id="VInfo">
+    <div>
+      <ul>
+        <!-- 在template中使用驼峰 -->
+        <li v-for="(item, id, index) in (cInfo)">{{id}}: {{item}}</li>
+      </ul>
+    </div>
+  </template>
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+
+    const VInfo = {
+      template: "#VInfo",
+      props: {
+        // 在js中使用驼峰
+        cInfo: {
+          type: Object,
+          default() {
+            return {}
+          }
+        }
+      }
+    }
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        info: {
+          a: {
+            name: 'k1nz',
+            age: 20,
+            height: 185
+          },
+          b: {
+            name: 'kennyS',
+            age: 25,
+            height: 175
+          }
+        },
+      },
+      components: {
+        'v-info': VInfo,
+      }
+    })
+  </script>
+</body>
+
+</html>

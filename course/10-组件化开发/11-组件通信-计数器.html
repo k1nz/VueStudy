@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <v-counter @counter-inc="increment" @counter-dec="decrement"></v-counter>
+    <h2>counter: {{counter}}</h2>
+  </div>
+
+  <template id="counterBtn">
+    <div>
+      <button @click="cIncrement">+1</button>
+      <button @click="cDecrement">-1</button>
+    </div>
+  </template>
+
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+    const counterBtn = {
+      template: '#counterBtn',
+      methods: {
+        cIncrement(e) {
+          this.$emit('counter-inc')
+        },
+        cDecrement(e) {
+          this.$emit('counter-dec')
+        }
+      }
+    }
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        counter: 0,
+      },
+      methods: {
+        increment() {
+          this.counter++
+        },
+        decrement() {
+          this.counter--
+        },
+      },
+      components: {
+        'v-counter': counterBtn
+      }
+    })
+  </script>
+</body>
+
+</html>

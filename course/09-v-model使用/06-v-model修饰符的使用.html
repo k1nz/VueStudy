@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 1.修饰符: lazy -->
+    <!-- 不会实时改变data中的数据，使用lazy修饰符时可以让数据在失去焦点或回车时才会更新 -->
+    <input type="text" v-model.lazy="message">
+
+    <br>
+    <!-- 2.修饰符: number -->
+    <!-- 使用number修饰符时，能将v-model默认的字符串类型改变为number类型，推荐配合input:number使用 -->
+    <input type="number" v-model.number="number">
+    {{number}}-{{typeof number}}
+
+    <br>
+    <!-- 3.修饰符: trim -->
+    <!-- 使用trim修饰符可以将字符串两端的空格自动去除 -->
+    <input type="text" v-model.trim="name">
+  </div>
+
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello',
+        number: '',
+      }
+    })
+  </script>
+</body>
+
+</html>
