@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 1.使用npm install webpack@3.6.0 --save-dev 进行局部安装-->
+  <!-- 2.项目根目录下创建webpack.config.js文件，指定输入输出文件位置及文件名 -->
+  <!-- 3.npm init 对项目初始化 -->
+  <!-- 4.package.json下的script对象中可以指定npm run方法，创建build属性，其属性值为"webpack"，即可使用npm run build运行webpack命令 -->
+  <!-- 5.使用npm run build命令可以先从本地执行webpack命令，如果本地没有安装webpack，则去全局运行 -->
+  <div id="app">
+    <h2>{{message}}</h2>
+  </div>
+
+  TEST
+</body>
+<script src="./dist/bundle.js"></script>
+
+</html>

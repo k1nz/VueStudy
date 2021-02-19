@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <cpn>
+      <!-- 定义了slot属性，会找到对应name属性的插槽 -->
+      <button slot="left">返回</button>
+      <input type="text" slot="center">
+      <button slot="right">筛选</button>
+      <!-- 没有定义slot属性的元素会替换组件中没有定义name属性的slot -->
+      <p>没有slot属性</p>
+    </cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <slot name="left"></slot>
+      <slot name="center"></slot>
+      <slot name="right"></slot>
+      <slot></slot>
+      <slot></slot>
+      <slot></slot>
+    </div>
+  </template>
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello',
+      },
+      components: {
+        cpn: {
+          template: "#cpn"
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

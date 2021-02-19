@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <v-cpn></v-cpn>
+    <v-cpn></v-cpn>
+    <!-- 使用ref属性声明 -->
+    <v-cpn ref="ref1"></v-cpn>
+    <button @click="parentBtn1">父组件按钮$children</button>
+    <button @click="parentBtn2">父组件按钮$children</button>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <h2>我是子组件</h2>
+    </div>
+  </template>
+
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      methods: {
+        // 使用$children访问子组件中的方法或变量。
+        // $children =>返回子组件对象的数组
+        // 使用这种方法
+        parentBtn1() {
+          console.log(this.$children[1].name);
+          this.$children[1].childrenMethods() // 访问#app中第二个v-cpn子组件中的childrenMethods方法
+        },
+        // 使用$refs访问
+        // $refs => 返回含有子组件对象的对象，当在子组件标签中的属性声明了ref="refName"时，才会加入$refs对象中
+        parentBtn2() {
+          console.log(this.$refs.ref1.name);
+          this.$refs.ref1.childrenMethods()
+        }
+      },
+      components: {
+        "v-cpn": {
+          template: "#cpn",
+          data() {
+            return {
+              name: "子组件中的name"
+            }
+          },
+          methods: {
+            childrenMethods() {
+              console.log("子组件中的方法childrenMethods()");
+            }
+          },
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

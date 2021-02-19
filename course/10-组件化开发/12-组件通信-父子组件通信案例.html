@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <v-cpn :number1="num1" :number2="num2" @input-event="inputEvent" />
+  </div>
+
+  <template id="test">
+    <div>
+      <h2>props: {{number1}}</h2>
+      <h2>data: {{dNumber1}}</h2>
+      <input type="text" v-model="dNumber1" @input="iEvent($event, 'num1')">
+
+      <h2>props: {{number2}}</h2>
+      <h2>data: {{dNumber2}}</h2>
+      <input type=" text" v-model="dNumber2" @input="iEvent($event, 'num2')">
+    </div>
+  </template>
+  <script src='../../VueJS/vue.js'></script>
+  <script>
+    // 创建一个组件，使num1的值永远为num2的1/100
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        num1: 1,
+        num2: 100
+      },
+      methods: {
+        inputEvent(e) {
+          this[e.num] = e.inputValue
+        }
+      },
+      components: {
+        "v-cpn": {
+          template: '#test',
+          props: {
+            number1: Number,
+            number2: Number
+          },
+          data() {
+            return {
+              dNumber1: this.number1,
+              dNumber2: this.number2,
+            }
+          },
+          methods: {
+            iEvent(e, num) {
+              this.$emit('input-event',
+                {
+                  // inputValue: Number(e.target.value),
+                  inputValue: parseFloat(e.target.value),
+                  num
+                }
+              )
+              if (num == "num1") {
+
+                this.dNumber2 = this.dNumber1 * 100
+                this.$emit('input-event',
+                  {
+                    // inputValue: Number(e.target.value),
+                    inputValue: parseFloat(e.target.value * 100),
+                    num: "num2"
+                  }
+                )
+              }
+              else {
+                this.dNumber1 = this.dNumber2 / 100
+                this.$emit('input-event',
+                  {
+                    // inputValue: Number(e.target.value),
+                    inputValue: parseFloat(e.target.value / 100),
+                    num: "num1"
+                  }
+                )
+              }
+            }
+          },
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
