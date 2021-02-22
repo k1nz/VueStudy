@@ -24,3 +24,6 @@ new Vue({
     App,
   },
 })
+
+document.writeln("<h1>test</h1>")
+document.writeln("<span>helloDevServer</span>")

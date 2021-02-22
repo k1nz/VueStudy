@@ -1,15 +1,19 @@
 const path = require("path")
+const webpack = require("webpack")
 // webpack.config.js
 const VueLoaderPlugin = require("vue-loader/lib/plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const UglifyjsWebpackPlugin = require("uglifyjs-webpack-plugin")
 
 module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
-    publicPath: "dist/", // url前面自动拼接
+    // publicPath: "dist/", // url前面自动拼接
   },
   module: {
+    unknownContextCritical: false,
     rules: [
       {
         test: /\.css$/i,
@@ -71,5 +75,16 @@ module.exports = {
       vue$: "vue/dist/vue.esm.js",
     },
   },
-  plugins: [new VueLoaderPlugin()],
+  plugins: [
+    new VueLoaderPlugin(),
+    new webpack.BannerPlugin("最终版权归k1nz所有"),
+    new HtmlWebpackPlugin({
+      template: "index.html",
+    }),
+    // new UglifyjsWebpackPlugin(),
+  ],
+  devServer: {
+    contentBase: "./dist", // 服务文件夹
+    inline: true, // 页面实时刷新
+  },
 }
