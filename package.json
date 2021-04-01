@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/k1nz/VueStudy/issues"
   },
-  "homepage": "https://github.com/k1nz/VueStudy#readme"
+  "homepage": "https://github.com/k1nz/VueStudy#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
